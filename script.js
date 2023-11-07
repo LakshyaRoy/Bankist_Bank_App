@@ -61,9 +61,11 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
+  const mov = sort ? movements?.slice()?.sort((a, b) => a - b) : movements;
+
+  mov.forEach(function (mov, i) {
     const type = mov > 0 ? `deposit` : `withdrawal`;
 
     const html = `<div class="movements__row">
@@ -215,6 +217,13 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
+
 // Lecture
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -341,3 +350,49 @@ console.log(movementsDescription);
 // }, movements[0]);
 
 // console.log(max);
+
+// const arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9], 10];
+// // console.log(arr.flat());
+
+// const arrDeep = [[1, [22, [112, 114], 11, 12], 2, 3], [4, 5, 6], [7, 8, 9], 10];
+
+// console.log(arrDeep.flat(3));
+
+// const accountMovements = accounts.map(acc => acc.movements);
+// console.log(accountMovements);
+// const allMovements = accountMovements.flat();
+// const overAllBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overAllBalance);
+
+// flat
+// want to go i level deep then use flat else use flatmap
+// const overAllBalance = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+
+// console.log(overAllBalance);
+
+// // flatmap
+
+// const overAllBalance2 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+
+// console.log(overAllBalance2);
+// strings
+// const owners = ['jonas', 'ack', 'ill', 'ames'];
+// console.log(owners.sort());
+
+// // numbers
+// console.log(movements);
+// // console.log(movements.sort());
+
+// // return < 0, A, B (keep order)
+// // return > 0, B, A (switch order)
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (b > a) return -1;
+// });
+
+// console.log(movements);
