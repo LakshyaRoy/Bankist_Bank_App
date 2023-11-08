@@ -60,6 +60,7 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
+const date = document.querySelector('.date');
 
 const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
@@ -125,6 +126,16 @@ const updateUi = function (acc) {
   calcDisplayBalance(acc);
   // display summery
   calcDisplaySummery(acc);
+  currDate();
+};
+
+const currDate = () => {
+  date.textContent = '';
+  const now = new Date();
+  console.log(now);
+  date.textContent = `${now.getDate()}/${
+    now.getMonth() + 1
+  }/${now.getFullYear()}`;
 };
 
 btnLogin.addEventListener('click', function (e) {
@@ -396,3 +407,25 @@ console.log(movementsDescription);
 // });
 
 // console.log(movements);
+
+// const arr = [1, 2, 3, 4, 5, 6, 7];
+// arr.fill(23, 2, 4);
+// console.log(arr);
+// const x = new Array(7);
+// console.log(x);
+
+// //  Array.from
+// const y = Array.from({ length: 7 }, () => 1);
+// console.log(y);
+
+// const z = Array.from({ length: 7 }, (_, i) => i + 1);
+// console.log(z);
+
+// labelBalance.addEventListener('click', () => {
+//   const movementsUi = Array.from(
+//     document.querySelectorAll('.movements__value'),
+//     mov => Number(mov.textContent.replace('€', ''))
+//   );
+
+//   console.log(movementsUi.reduce((acc, mov) => acc + mov, 0));
+// });
