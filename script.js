@@ -429,3 +429,43 @@ console.log(movementsDescription);
 
 //   console.log(movementsUi.reduce((acc, mov) => acc + mov, 0));
 // });
+
+const bankDepositeSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, acc) => sum + acc, 0);
+
+console.log(bankDepositeSum);
+
+// const NumDeposit1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+
+const NumDeposit1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((count, acc) => (acc >= 1000 ? count + 1 : count), 0);
+
+console.log(NumDeposit1000);
+
+const sums = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, curr) => {
+      curr > 0 ? (sums.deposit += curr) : (sums.withdraw += curr);
+      sums.balance = sums.deposit - sums.withdraw;
+
+      return sums;
+    },
+    { deposit: 0, withdraw: 0, balance: 0 }
+  );
+
+console.log(sums);
+
+const convertTitleCAse = function (title) {
+  const exceptions =  ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+  const titleCase = title.
+};
+
+console.log(convertTitleCAse('this is a nice title'));
+console.log(convertTitleCAse('This Is a Nice Title'));
+console.log(convertTitleCAse('and here is an another title with na Example '));
